@@ -1,7 +1,7 @@
 /* Extracted styles from index.html */
 :root{
-  --bg: #f7fafc;
-  --card: #ffffff;
+  --bg: #ffffff;
+  --card: transparent;
   --muted: #6b7280;
   --accent: #0ea5a4;
   --maxw: 880px;
@@ -13,7 +13,7 @@ body{
   display:flex; align-items:flex-start; justify-content:center; padding:48px 20px;
 }
 .container{
-  width:100%; max-width:var(--maxw); background:var(--card); border-radius:12px; box-shadow:0 8px 30px rgba(2,6,23,0.08); padding:36px;
+  width:100%; max-width:var(--maxw); background:transparent; padding:36px;
 }
 .header{display:flex; align-items:center; gap:20px; flex-wrap:wrap}
 .photo{
@@ -37,7 +37,9 @@ hr.sep{border:0; height:1px; background:linear-gradient(90deg,transparent,#e6edf
 .pub{padding:12px 14px; border-radius:8px; border:1px solid #eef2f6; margin-bottom:10px}
 .pub .meta-line{font-size:0.9rem; color:var(--muted); margin-top:6px}
 .pub a{color:var(--accent); text-decoration:none}
-.side-card{background:#fbfdff; border:1px solid #eef6f7; padding:16px; border-radius:10px}
+.side-card{
+  background:transparent; border:none; padding:16px;
+}
 .contact-list{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px}
 .contact-list a{display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:var(--muted)}
 .btn{display:inline-block; padding:8px 12px; border-radius:8px; background:var(--accent); color:white; text-decoration:none; font-weight:600}
