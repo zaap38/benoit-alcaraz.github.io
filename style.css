@@ -1,0 +1,44 @@
+/* Extracted styles from index.html */
+:root{
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #0ea5a4;
+  --maxw: 880px;
+}
+*{box-sizing:border-box}
+body{
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  margin:0; background:var(--bg); color:#0f172a; -webkit-font-smoothing:antialiased;
+  display:flex; align-items:flex-start; justify-content:center; padding:48px 20px;
+}
+.container{
+  width:100%; max-width:var(--maxw); background:var(--card); border-radius:12px; box-shadow:0 8px 30px rgba(2,6,23,0.08); padding:36px;
+}
+.header{display:flex; align-items:center; gap:20px; flex-wrap:wrap}
+.photo{
+  width:140px; height:140px; border-radius:50%; overflow:hidden; flex:0 0 140px; background:linear-gradient(135deg,#e6fffa,#fff);
+  display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(2,6,23,0.08);
+}
+.photo img{width:100%; height:100%; object-fit:cover; display:block}
+.title{flex:1 1 auto; min-width:200px}
+.name{font-size:1.6rem; margin:0 0 6px; font-weight:700}
+.role{color:var(--muted); margin:0; font-size:0.95rem}
+hr.sep{border:0; height:1px; background:linear-gradient(90deg,transparent,#e6edf0,transparent); margin:20px 0}
+.meta{display:flex; gap:20px; flex-wrap:wrap}
+.meta .item{display:flex; align-items:center; gap:10px; font-size:0.95rem; color:var(--muted)}
+.meta a{color:inherit; text-decoration:none}
+.meta a:hover{color:var(--accent)}
+.grid{display:grid; grid-template-columns:1fr 340px; gap:28px}
+@media (max-width:900px){ .grid{grid-template-columns:1fr;} .photo{margin:auto} }
+.section-title{font-weight:600; margin:0 0 8px}
+.about{color:#0f172a; line-height:1.55}
+.pub-list{list-style:none; padding:0; margin:12px 0 0}
+.pub{padding:12px 14px; border-radius:8px; border:1px solid #eef2f6; margin-bottom:10px}
+.pub .meta-line{font-size:0.9rem; color:var(--muted); margin-top:6px}
+.pub a{color:var(--accent); text-decoration:none}
+.side-card{background:#fbfdff; border:1px solid #eef6f7; padding:16px; border-radius:10px}
+.contact-list{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px}
+.contact-list a{display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:var(--muted)}
+.btn{display:inline-block; padding:8px 12px; border-radius:8px; background:var(--accent); color:white; text-decoration:none; font-weight:600}
+.hint{font-size:0.85rem; color:var(--muted)}

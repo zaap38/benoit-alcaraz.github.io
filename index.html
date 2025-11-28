@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name — Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container" role="main">
+    <header class="header">
+      <div class="photo" aria-hidden="false">
+        <!-- Replace 'your-photo.jpg' with your photo path or an absolute URL -->
+        <img src="your-photo.jpg" alt="Your Name photo" />
+      </div>
+      <div class="title">
+        <h1 class="name">Your Name</h1>
+        <p class="role">Position • Department • Institution</p>
+        <div class="meta" style="margin-top:12px">
+          <div class="item">📍 Current institution: <strong style="margin-left:6px">Institution Name</strong></div>
+          <div class="item">✉️ <a href="mailto:you@example.com">you@example.com</a></div>
+          <div class="item">💼 <a href="#">CV (PDF)</a></div>
+        </div>
+      </div>
+    </header>
+
+    <hr class="sep" />
+
+    <div class="grid">
+      <section>
+        <h2 class="section-title">Personal description</h2>
+        <p class="about">Briefly describe your research interests, methods, and high-level goals. Example: I work on machine learning for healthcare, focusing on interpretable models for clinical decision support. My recent work explores probabilistic methods for small-data regimes and fairness-aware learning.</p>
+
+        <h2 class="section-title" style="margin-top:18px">Publications</h2>
+        <p class="hint">Selected publications — update this list in the HTML or generate it automatically from BibTeX/ORCID if you prefer.</p>
+
+        <ul class="pub-list" id="pub-list">
+          <!-- Example publication entries. Replace these with your publications. -->
+          <li class="pub">
+            <div><strong>Doe, J.</strong>, Smith, A. (2024). <a href="#">Title of the paper</a>. <em>Journal of Interesting Results</em>.</div>
+            <div class="meta-line">arXiv:2401.01234 • <a href="#">PDF</a> • <a href="#">BibTeX</a></div>
+          </li>
+
+          <li class="pub">
+            <div><strong>Doe, J.</strong> (2022). Another important result. <em>Conference on Important Stuff (CIS)</em>.</div>
+            <div class="meta-line">doi:10.1234/cis.2022.456 • <a href="#">Slides</a> • <a href="#">Code</a></div>
+          </li>
+
+          <!-- Add more publications here -->
+        </ul>
+      </section>
+
+      <aside class="side-card" aria-labelledby="contact-heading">
+        <h3 id="contact-heading" class="section-title">Contact & links</h3>
+        <ul class="contact-list">
+          <li><a href="https://github.com/your-github" target="_blank" rel="noopener">GitHub: your-github</a></li>
+          <li><a href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="https://orcid.org/" target="_blank" rel="noopener">ORCID: 0000-0000-0000-0000</a></li>
+          <li><a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+
+        <div style="margin-top:12px">
+          <a class="btn" href="#">Download CV</a>
+        </div>
+
+        <div style="margin-top:14px; font-size:0.9rem; color:var(--muted)">
+          <div><strong>Office:</strong> Building, Room</div>
+          <div style="margin-top:6px"><strong>Phone:</strong> +33 6 12 34 56 78</div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top:24px; padding-top:10px; border-top:1px dashed #eef2f6; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap">
+      <div class="hint">© <span id="year"></span> Your Name — <a href="#">Privacy</a></div>
+      <div class="hint">Built with ❤️ · Static HTML</div>
+    </footer>
+  </main>
+
+  <script>
+    // small JS helpers: update year, and demonstrate how to add publications programmatically
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Example: add a publication dynamically (useful if you fetch a JSON/BibTeX parser later)
+    function addPublication(item){
+      const ul = document.getElementById('pub-list');
+      const li = document.createElement('li'); li.className='pub';
+      li.innerHTML = `<div><strong>${item.authors}</strong> (${item.year}). ${item.title} ${item.venue ? '<em>'+item.venue+'</em>' : ''}.</div>` +
+                     (item.links? `<div class='meta-line'>${item.links.join(' • ')}</div>` : '');
+      ul.appendChild(li);
+    }
+
+    // Example usage:
+    // addPublication({authors:'Doe, J.', year:2021, title:'Programmatic paper', venue:'Journal X', links:['<a href="#">PDF</a>']});
+  </script>
+</body>
+</html>
