@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Alex Doe — Product Designer</title>
+    <title>Benoît Alcaraz</title>
 
     <!-- Google font -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,10 +21,9 @@
       <header class="site-header">
         <a class="logo" href="#">BA<span class="dot">.</span></a>
         <nav class="nav">
-          <a href="#about">About</a>
+          <a href="#about">About me</a>
           <a href="#publications">Publications</a>
-          <a href="#notes">Notes</a>
-          <a href="#contact" class="cta">Contact</a>
+          <a href="#hobbies">Hobbies</a>
         </nav>
         <button class="menu-btn" aria-label="Open menu">☰</button>
       </header>
@@ -35,7 +34,7 @@
             <div class="hero-text">
               <p class="eyebrow">Hello, I’m</p>
               <h1>Benoît Alcaraz <span class="flag">🇫🇷</span><span class="accent">.</span></h1>
-              <p class="lead">4th year Ph.D student in the University of Luxembourg.</p>
+              <p class="lead">4th year Ph.D student at the University of Luxembourg.</p>
 
               <p class="tags">
                 <span>Multi-agent systems</span>
@@ -43,10 +42,9 @@
                 <span>Reinforcement learning</span>
               </p>
 
-              <p class="hero-cta">
-                <a class="btn primary" href="#publications">See my work</a>
-                <a class="btn ghost" href="/resume.pdf">Resume</a>
-              </p>
+              <div class="hero-photo-container">
+                <img src="photo.png" alt="Benoît Alcaraz" class="hero-photo">
+              </div>
             </div>
 
             <div class="hero-card" aria-hidden="true">
@@ -69,6 +67,17 @@
                         <div class="orcid-number">
                         0000-0002-7507-5328
                         </div>
+
+                        <hr class="mockup-separator">
+                        
+                        <p class="contact-mail">
+                          <!-- Mail icon SVG -->
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: middle; margin-right: 6px;">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-5.803 3.484L15 12.383V5.383zM14.803 13H1.197L7 7.867 14.803 13zM1 12.383l5.803-3.516L1 5.383v7z"/>
+                          </svg>
+                          <!-- <a href="mailto:hello@example.com">hello@example.com</a> -->
+                           benoit.alcaraz [at] uni.lu
+                        </p>
                     </div>
                     </div>
                 </div>
@@ -76,14 +85,19 @@
           </div>
         </section>
 
+        <a href="#about" class="scroll-down" aria-label="Scroll down">
+          <span></span>
+        </a>
+
         <section id="about" class="section about">
           <div class="container">
-            <h2>About</h2>
-            <p>I’m a product designer based in Luxembourg focused on helping teams ship delightful, usable products. I love building interfaces that feel fast and intuitive and collaborating across product, engineering, and research.</p>
+            <h2>About me</h2>
+            <p>I am currently a Ph.D student at the University of Luxembourg, Belval campus. My research focuses on enabling artificial agents to comply with norms, primarily through reinforcement learning. I am also curious and enjoy exploring a variety of topics related to AI.</p>
             <div class="stats">
-              <div><strong>8+</strong><span>years</span></div>
-              <div><strong>50+</strong><span>projects</span></div>
-              <div><strong>3</strong><span>startups</span></div>
+              <div><strong>C++</strong></div>
+              <div><strong>Python</strong></div>
+              <div><strong>Reinforcement learning</strong></div>
+              <div><strong>Genetic algorithms</strong></div>
             </div>
           </div>
         </section>
@@ -91,42 +105,21 @@
         <section id="publications" class="section work">
             <div class="container">
                 <h2>Publications</h2>
+                  <p class="muted">Selected peer-reviewed articles and conference papers.</p>
 
-                <section id="publications" class="section work">
-                  <div class="container">
-                    <h2>Publications</h2>
-                    <p class="muted">Selected peer-reviewed articles and conference papers.</p>
-
-                    <!-- where parsed publications will be inserted -->
-                    <ol id="pub-list" class="pub-list"></ol>
-                  </div>
-                </section>
+                  <!-- where parsed publications will be inserted -->
+                  <ol id="pub-list" class="pub-list"></ol>
             </div>
         </section>
 
 
-        <section id="notes" class="section notes">
+        <section id="hobbies" class="section notes">
           <div class="container">
-            <h2>Notes</h2>
+            <h2>Hobbies</h2>
             <ul class="notes-list">
-              <li><a href="#">How to run a lightweight research sprint</a></li>
-              <li><a href="#">Designing for low-bandwidth users</a></li>
-              <li><a href="#">Accessibility checklist for designers</a></li>
+              <li><p>On my free time, I enjoy playing guitar. I mainly listen to jazz.</p></li>
+              <li><p>I am also a enjoying car engineering, as well as motorsport.</p></li>
             </ul>
-          </div>
-        </section>
-
-        <section id="contact" class="section contact">
-          <div class="container">
-            <h2>Get in touch</h2>
-            <p>If you’d like to work together or just say hi, I’m available for freelance and full-time roles.</p>
-            <p><a class="btn primary" href="mailto:hello@example.com">hello@example.com</a></p>
-            <p class="socials">
-              <a href="#">Dribbble</a>
-              <a href="#">Behance</a>
-              <a href="#">Twitter</a>
-              <a href="#">LinkedIn</a>
-            </p>
           </div>
         </section>
       </main>

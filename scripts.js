@@ -114,6 +114,28 @@
     };
   }
 
+  // Render entries with year splitters
+function renderEntriesWithYearSplit(entries) {
+  if (!entries || entries.length === 0) return '';
+
+  // Sort by year descending
+  entries.sort((a,b) => parseInt(b.year||0) - parseInt(a.year||0));
+
+  let lastYear = null;
+  const html = [];
+
+  for (const e of entries) {
+    if (e.year && e.year !== lastYear) {
+      html.push(`<li class="year-splitter">${e.year}</li>`);
+      lastYear = e.year;
+    }
+    html.push(renderEntryHTML(e));
+  }
+
+  return html.join('\n');
+}
+
+
   function renderEntryHTML(e) {
     const authorHtml = e.authors
         .map(a => `<span class="pub-author">${escapeHtml(decodeLaTeX(a))}</span>`)
@@ -201,7 +223,9 @@
     console.log('[pubs] parsed entries count:', entries.length);
     // render simple list (default sort: year desc)
     entries.sort((a,b) => (parseInt(b.year||0) - parseInt(a.year||0)));
-    const html = entries.map(renderEntryHTML).join('\n');
+    // const html = entries.map(renderEntryHTML).join('\n');
+    // listEl.innerHTML = html;
+    const html = renderEntriesWithYearSplit(entries);
     listEl.innerHTML = html;
 
     // basic interactivity: toggle bibtex
