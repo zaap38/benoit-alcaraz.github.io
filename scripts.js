@@ -1,6 +1,6 @@
 // loadPublications.js (diagnostic + fallback)
 (async function(){
-  const BIB_PATH = '/publications.bib'; // adjust if needed
+  const BIB_PATH = 'https://zaap38.github.io/benoit-alcaraz.github.io/publications.bib'; // adjust if needed
   const listEl = document.getElementById('pub-list');
   const sortEl = document.getElementById('pub-sort');
   const downloadBtn = document.getElementById('download-bib');
@@ -53,44 +53,84 @@
     }
   }
 
-  // very small fallback parser: split on @, extract key fields by regex
-  function fallbackParse(text) {
-    console.log('[pubs] using fallback parser');
-    const entries = [];
-    // split by @ but preserve starting @
-    const parts = text.split(/\n@/).map((p,i) => (i===0 ? p.trim() : '@'+p.trim())).filter(Boolean);
-    for (const part of parts) {
-      // ensure starts with @type{key,
-      const headMatch = part.match(/^@([a-zA-Z]+)\s*\{\s*([^,]+),/);
-      if (!headMatch) continue;
-      const entryType = headMatch[1];
-      const key = headMatch[2];
-      // extract some fields
-      const titleMatch = part.match(/title\s*=\s*[{"]([^"}]+)[}"]/i);
-      const authorMatch = part.match(/author\s*=\s*[{"]([^"}]+)[}"]/i);
-      const yearMatch = part.match(/year\s*=\s*[{"]?(\d{4})/i);
-      const urlMatch = part.match(/url\s*=\s*[{"]([^"}]+)[}"]/i);
-      const doiMatch = part.match(/doi\s*=\s*[{"]?([^",}\s]+)[}"]/i);
-      const booktitleMatch = part.match(/booktitle\s*=\s*[{"]([^"}]+)[}"]/i);
-      const journalMatch = part.match(/journal\s*=\s*[{"]([^"}]+)[}"]/i);
-      entries.push({
-        citationKey: key,
-        entryType,
-        entryTags: {
-          title: titleMatch ? titleMatch[1].trim() : '',
-          author: authorMatch ? authorMatch[1].trim() : '',
-          year: yearMatch ? yearMatch[1] : '',
-          url: urlMatch ? urlMatch[1] : '',
-          doi: doiMatch ? doiMatch[1] : '',
-          booktitle: booktitleMatch ? booktitleMatch[1] : (journalMatch ? journalMatch[1] : '')
-        }
-      });
-    }
-    return entries;
+//   // very small fallback parser: split on @, extract key fields by regex
+//   function fallbackParse(text) {
+//     console.log('[pubs] using fallback parser');
+//     const entries = [];
+//     // split by @ but preserve starting @
+//     const parts = text.split(/\n@/).map((p,i) => (i===0 ? p.trim() : '@'+p.trim())).filter(Boolean);
+//     for (const part of parts) {
+//       // ensure starts with @type{key,
+//       const headMatch = part.match(/^@([a-zA-Z]+)\s*\{\s*([^,]+),/);
+//       if (!headMatch) continue;
+//       const entryType = headMatch[1];
+//       const key = headMatch[2];
+//       // extract some fields
+//       const titleMatch = part.match(/title\s*=\s*[{"]([^"}]+)[}"]/i);
+//       const authorMatch = part.match(/author\s*=\s*[{"]([^"}]+)[}"]/i);
+//       const yearMatch = part.match(/year\s*=\s*[{"]?(\d{4})/i);
+//       const urlMatch = part.match(/url\s*=\s*[{"]([^"}]+)[}"]/i);
+//       const doiMatch = part.match(/doi\s*=\s*[{"]?([^",}\s]+)[}"]/i);
+//       const booktitleMatch = part.match(/booktitle\s*=\s*[{"]([^"}]+)[}"]/i);
+//       const journalMatch = part.match(/journal\s*=\s*[{"]([^"}]+)[}"]/i);
+//       entries.push({
+//         citationKey: key,
+//         entryType,
+//         entryTags: {
+//           title: titleMatch ? titleMatch[1].trim() : '',
+//           author: authorMatch ? authorMatch[1].trim() : '',
+//           year: yearMatch ? yearMatch[1] : '',
+//           url: urlMatch ? urlMatch[1] : '',
+//           doi: doiMatch ? doiMatch[1] : '',
+//           booktitle: booktitleMatch ? booktitleMatch[1] : (journalMatch ? journalMatch[1] : '')
+//         }
+//       });
+//     }
+//     return entries;
+//   }
+
+// very small fallback parser: split on @, extract key fields by regex
+function fallbackParse(text) {
+  console.log('[pubs] using fallback parser');
+  const entries = [];
+  // split by @ but preserve starting @
+  const parts = text.split(/\n@/).map((p,i) => (i===0 ? p.trim() : '@'+p.trim())).filter(Boolean);
+  for (const part of parts) {
+    // ensure starts with @type{key,
+    const headMatch = part.match(/^@([a-zA-Z]+)\s*\{\s*([^,]+),/);
+    if (!headMatch) continue;
+    const entryType = headMatch[1];
+    const key = headMatch[2];
+    // extract some fields
+    const titleMatch = part.match(/title\s*=\s*[{"]([^"}]+)[}"]/i);
+    const authorMatch = part.match(/author\s*=\s*[{"]([^"}]+)[}"]/i);
+    const yearMatch = part.match(/year\s*=\s*[{"]?(\d{4})/i);
+    const urlMatch = part.match(/url\s*=\s*[{"]([^"}]+)[}"]/i);
+    const doiMatch = part.match(/doi\s*=\s*[{"]?([^",}\s]+)[}"]/i);
+    const booktitleMatch = part.match(/booktitle\s*=\s*[{"]([^"}]+)[}"]/i);
+    const journalMatch = part.match(/journal\s*=\s*[{"]([^"}]+)[}"]/i);
+    
+    entries.push({
+      citationKey: key,
+      entryType,
+      entryTags: {
+        title: titleMatch ? titleMatch[1].trim() : '',
+        author: authorMatch ? authorMatch[1].trim() : '',
+        year: yearMatch ? yearMatch[1] : '',
+        url: urlMatch ? urlMatch[1] : '',
+        doi: doiMatch ? doiMatch[1] : '',
+        booktitle: booktitleMatch ? booktitleMatch[1] : (journalMatch ? journalMatch[1] : '')
+      },
+      raw: part.trim()  // <-- add raw BibTeX text here
+    });
   }
+  return entries;
+}
+
 
   function normalizeEntry(e) {
     const fields = e.entryTags || e.fields || e;
+    console.log(e)
 
     // title, authors, etc.
     const titleRaw = (fields.title || '') + '';
@@ -101,6 +141,7 @@
     const doi = fields.doi ? (fields.doi.startsWith('http') ? fields.doi : 'https://doi.org/' + fields.doi.replace(/^doi:\s*/i,'')) : (fields.doi || '');
     const url = fields.url || fields.pdf || '';
     const booktitle = fields.booktitle || fields.journal || '';
+    const raw = e.raw;
 
     return {
         id: e.citationKey || e.citationkey || e.citationKey || (title.substring(0,20).replace(/\W/g,'')),
@@ -110,7 +151,8 @@
         year,
         doi,
         url,
-        booktitle
+        booktitle,
+        raw
     };
   }
 
@@ -148,33 +190,27 @@ function renderEntriesWithYearSplit(entries) {
     // Safely get booktitle/conference from any field
     const booktitle = e.booktitle;
     if (booktitle) metaParts.push(`<span class="pub-conference"><em>${escapeHtml(decodeLaTeX(booktitle))}</em></span>`);
-    console.log(e.booktitle)
     if (e.year) metaParts.push(`<span class="pub-year">${escapeHtml(e.year)}</span>`);
 
     const links = [];
     if (e.doi) links.push(`<a class="pub-link" href="${encodeURI(e.doi)}" target="_blank" rel="noopener">DOI</a>`);
     if (e.url) links.push(`<a class="pub-link" href="${encodeURI(e.url)}" target="_blank" rel="noopener">PDF</a>`);
-    links.push(`<a class="pub-link bibtex-toggle" href="#" data-key="${e.id}">BibTeX</a>`);
+    links.push(`<a class="pub-link bibtex-toggle" href="#" data-key="${e.raw}">BibTeX</a>`);
 
     return `
     <li class="pub-entry" id="pub-${e.id}">
         <div class="pub-main">${titleHtml}</div>
         <div class="pub-meta">${authorHtml}${metaParts.length ? " • " + metaParts.join(' • ') : ''}</div>
         <div class="pub-actions">${links.join(' • ')}</div>
-        <pre class="pub-bib hidden" id="bib-${e.id}">${escapeHtml(renderBib(e))}</pre>
+        <pre class="pub-bib hidden" id="bib-${e.raw}">${escapeHtml(renderBib(e))}</pre>
     </li>`;
   }
 
 
 
   function renderBib(e) {
-    const k = e.id || 'key';
-    const fields = e.raw || {};
-    let inner = '';
-    for (const prop of Object.keys(fields)) {
-      inner += `  ${prop} = {${fields[prop]}},\n`;
-    }
-    return `@${e.type}{${k},\n${inner}}`;
+    const k = e.raw || 'key';
+    return `@${e.type}{${k}`;
   }
 
   function escapeHtml(s) {
@@ -216,15 +252,16 @@ function renderEntriesWithYearSplit(entries) {
       return;
     }
 
+    console.log(parsed)
+
     // map & normalize
     // Suppose 'parsed' is the array returned by your parser
     const entries = parsed.map(normalizeEntry);
+    console.log(entries)
 
     console.log('[pubs] parsed entries count:', entries.length);
     // render simple list (default sort: year desc)
     entries.sort((a,b) => (parseInt(b.year||0) - parseInt(a.year||0)));
-    // const html = entries.map(renderEntryHTML).join('\n');
-    // listEl.innerHTML = html;
     const html = renderEntriesWithYearSplit(entries);
     listEl.innerHTML = html;
 
