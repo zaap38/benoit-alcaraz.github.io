@@ -210,7 +210,8 @@ function renderEntriesWithYearSplit(entries) {
 
   function renderBib(e) {
     const k = e.raw || 'key';
-    return `@${e.type}{${k}`;
+    //return `@${e.type}{${k}`;
+    return `${k}`;
   }
 
   function escapeHtml(s) {
